@@ -97,7 +97,14 @@
     margin-top: 10px;
     color: #888;
     font-size: 13px;
-    line-height: 1.8;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hint-content.show {
+    display: flex;
   }
 
   .hint-content img {
@@ -131,13 +138,15 @@
   <input type="password" id="passwordInput" placeholder="输入密码..." autofocus>
   <button onclick="checkPassword()">确认</button>
   <div class="error-msg" id="errorMsg">密码错误，请重试</div>
-  <div class="hint-toggle" onclick="document.getElementById('hintBox').style.display='block';this.style.display='none'">💡 提示</div>
+  <div class="hint-toggle" onclick="document.getElementById('hintBox').classList.add('show');this.style.display='none'">💡 提示</div>
   <div class="hint-content" id="hintBox">
-    <p>750-heita.png.xing.png = 0???</p>
+    <span>750-</span>
     <img src="heita.png" alt="heita">
+    <span>.png.</span>
     <img src="xing.png" alt="xing">
-    <p>kldl.png 3</p>
+    <span>.png = 0???</span>
     <img src="kldl.png" alt="kldl">
+    <span>.png 3</span>
   </div>
 </div>
 
