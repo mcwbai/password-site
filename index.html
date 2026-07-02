@@ -112,11 +112,17 @@
 </div>
 
 <script>
-  const PASSWORD = 'rxjjqdzhnrxojqdkv';
+  const PASSWORD_HASH = '09f2311c097b20492259b16a57a6df8a303f88b7054b64fcb58e268521e4a8ed';
 
-  function checkPassword() {
+  async function sha256(text) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword() {
     const input = document.getElementById('passwordInput').value;
-    if (input === PASSWORD) {
+    const hash = await sha256(input);
+    if (hash === PASSWORD_HASH) {
       document.getElementById('lockScreen').style.display = 'none';
       document.getElementById('contentScreen').style.display = 'block';
     } else {
@@ -125,7 +131,6 @@
     }
   }
 
-  // 回车键提交
   document.getElementById('passwordInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') checkPassword();
   });
