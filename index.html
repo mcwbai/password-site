@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>需要密码</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: -apple-system, "Microsoft YaHei", sans-serif;
+  }
+
+  /* 密码界面 */
+  .lock-screen {
+    text-align: center;
+    padding: 48px 32px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    border: 1px solid #2a2a2a;
+    width: 360px;
+    max-width: 90vw;
+  }
+
+  .lock-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .lock-screen h2 {
+    color: #ccc;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+
+  .lock-screen input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background: #0f0f0f;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .lock-screen input:focus {
+    border-color: #555;
+  }
+
+  .lock-screen button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: #ccc;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .lock-screen button:hover {
+    background: #444;
+  }
+
+  .error-msg {
+    color: #e05555;
+    font-size: 13px;
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* 内容界面 */
+  .content-screen {
+    display: none;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .content-screen img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+</style>
+</head>
+<body>
+
+<!-- 密码界面 -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-icon">🔒</div>
+  <h2>请输入密码以查看内容</h2>
+  <input type="password" id="passwordInput" placeholder="输入密码..." autofocus>
+  <button onclick="checkPassword()">确认</button>
+  <div class="error-msg" id="errorMsg">密码错误，请重试</div>
+</div>
+
+<!-- 内容界面 -->
+<div class="content-screen" id="contentScreen">
+  <img src="liuying.jpg" alt="liuying" onerror="this.parentElement.innerHTML='<p style=color:#888;font-size:16px>图片 liuying.jpg 未找到<br><br>请将图片放到与本页面同一目录下</p>'">
+</div>
+
+<script>
+  const PASSWORD = 'mcwbai';
+
+  function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    if (input === PASSWORD) {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('contentScreen').style.display = 'block';
+    } else {
+      document.getElementById('errorMsg').style.display = 'block';
+      document.getElementById('passwordInput').value = '';
+    }
+  }
+
+  // 回车键提交
+  document.getElementById('passwordInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+</script>
+
+</body>
+</html>
