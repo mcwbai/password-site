@@ -153,6 +153,7 @@
 <!-- 内容界面 -->
 <div class="content-screen" id="contentScreen">
   <img src="liuying.jpg" alt="liuying" onerror="this.parentElement.innerHTML='<p style=color:#888;font-size:16px>图片 liuying.jpg 未找到<br><br>请将图片放到与本页面同一目录下</p>'">
+  <audio id="bgAudio" src="yinpin.wav" loop style="display:none"></audio>
 </div>
 
 <script>
@@ -169,6 +170,8 @@
     if (hash === PASSWORD_HASH) {
       document.getElementById('lockScreen').style.display = 'none';
       document.getElementById('contentScreen').style.display = 'block';
+      const audio = document.getElementById('bgAudio');
+      if (audio) { audio.play().catch(() => {}); }
     } else {
       document.getElementById('errorMsg').style.display = 'block';
       document.getElementById('passwordInput').value = '';
